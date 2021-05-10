@@ -10,10 +10,16 @@ class Card{//linkedlist with nodes representing cards
  public:
     Card();
     ~Card();
+    void defaultHere();
+    string getCard() const;
     void printCards() const;
     void append(char suit,char num);
     bool contain(char suit, char num);
-    string readList() const;
+    void removeNode(Card c2);
+    bool looped(Card c2);
+    int getLen();
+    void getP();
+    Card(const Card& source);
     Card& operator=(const Card& source);
     
 
@@ -33,29 +39,18 @@ class Card{//linkedlist with nodes representing cards
     };
     Node*first;
     Node*here;
-};
-
-class Hand{
- public:
-    //static Hand* c;//if 
-    bool endGame();
-    bool Hcontains(Card* cpoint, char suit, char num) const;//searches if player hand has a particular card using a function in Card class
-    void remove_both();//remove, delete c
- private:
-    
-    
-
+    int p_here;
 };
 
 class Player{
 public:
     Player();
-    void addMatch();
     void setName(string newName);
     string getName();
-    void print(Card* cpoint);//print player name and match num
+    void addMatch();
     int getMatch();//get match num for print()
-    void append(Card* cpoint, char suit, char num);//add cards to set hand
+    //void append(Card* cpoint, char suit, char num);// dont need this
+    void print(Card* cpoint);//print player name and match num
 private:
     int match;
     string name;

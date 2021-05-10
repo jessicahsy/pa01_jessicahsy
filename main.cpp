@@ -30,7 +30,6 @@ int main(int argv, char** argc){
   // to contain two sets of cards in two input files
   Player p1,p2;
   Card c1,c2;
-  Hand h;
   Card*cpoint1=&c1;
   Card*cpoint2=&c2;
 
@@ -38,7 +37,7 @@ int main(int argv, char** argc){
   while (getline (cardFile1, line) && (line.length() > 0)){
     char suit=line[0];
     char num=line[2];
-    p1.append(cpoint1,suit,num);
+    c1.append(suit,num);
 
   }
   cardFile1.close();
@@ -46,42 +45,46 @@ int main(int argv, char** argc){
   while (getline (cardFile2, line) && (line.length() > 0)){
     char suit=line[0];
     char num=line[2];
-    p2.append(cpoint2,suit,num);
+    c2.append(suit,num);
   }
   cardFile2.close();
 
   // Start the game
   //##############################################################
-  // string name;
-  // cout<<endl<<"Enter Player1 Name>> ";
-  // cin >> name;
-  // p1.setName(name);
-  // cout<<endl<<"Enter Player2 Name>> ";
-  // cin >> name;
-  // p2.setName(name);
-  //INITIAL ^uncomment that later
-  //cout<<"p1 name: "<<p1.getName()<<endl;
-  cout<<"P1 CARDS\n\n";
-  c1.printCards();
-  //cout<<"p2 name: "<<p2.getName()<<endl;
-  cout<<"P2 CARDS\n\n";
-  c2.printCards();
-  //_________________________________
-  
-
-
- cout<<c1.contain('h','3')<<endl;
-//  char sc='a';
-//  string s(1,sc);
-//  cout<<s<<endl;
-  while (h.endGame()==false){
-     //game continues
-    char suit=c1.readList()[0];
-    char num=c1.readList()[2];
-    cout<<"Contain?"<<c2.contain(suit,num)<<endl;
-    cout<<"continue"<<endl;
-    break;
+  string name;
+  //cout<<"Enter Player1 Name>> ";
+  //cin >> name;
+  p1.setName("Alice");
+  //cout<<"Enter Player2 Name>> ";
+  //cin >> name;
+  p2.setName("Bob");
+  //INITIAL:
+  //cout<<"p1: "<<p1.getName()<<endl;
+  //c1.printCards();
+  //cout<<"p2: "<<p2.getName()<<endl;
+  //c2.printCards();
+ bool go=false;
+ int turn=0;//player1 goes on even num turns, player2 goes on odd num turns
+ while (c1.looped(c2)){
+  if (go==false){c1.defaultHere();}
+  int point=c1.looped(c2);
+  if (point!=-1){
+    if (turn%2==0){
+      p1.addMatch();
+      cout<<p1.getName()<<" picked matching card "<<c1.getCard()<<endl;
+      //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
+    }else{
+      p2.addMatch();
+      cout<<p2.getName()<<" picked matching card "<<c1.getCard()<<endl;
+    }
+    c1.removeNode(c2);
   }
-
+  turn++;
+ }
+ //cout<<c1.looped(c2);
+  p1.print(&c1);
+  p2.print(&c2);
+  //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
+  //cout<<"P2 Matches:"<<p2.getMatch()<<endl;
   return 0;
 }
