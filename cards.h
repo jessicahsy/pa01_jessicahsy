@@ -1,9 +1,67 @@
 //cards.h
-//Authors: Your Partner's Name and Your Name
+//Authors: Shin-Yi (Jessica) Ho
 //All class declarations go here
-
 #ifndef CARDS_H
 #define CARDS_H
+#include <string>
+using namespace std;
+
+class Card{//linkedlist with nodes representing cards
+ public:
+    Card();
+    ~Card();
+    void printCards() const;
+    void append(char suit,char num);
+    bool contain(char suit, char num);
+    string readList() const;
+    Card& operator=(const Card& source);
+    
+
+ private:
+    void remove_nodes(){
+        while(first!=nullptr){
+            Node* temp=first->next;
+            delete first;
+            first=temp; 
+        }
+    }
+    
+    struct Node {
+        char _suit;
+        char _num;
+        Node* next;
+    };
+    Node*first;
+    Node*here;
+};
+
+class Hand{
+ public:
+    //static Hand* c;//if 
+    bool endGame();
+    bool Hcontains(Card* cpoint, char suit, char num) const;//searches if player hand has a particular card using a function in Card class
+    void remove_both();//remove, delete c
+ private:
+    
+    
+
+};
+
+class Player{
+public:
+    Player();
+    void addMatch();
+    void setName(string newName);
+    string getName();
+    void print(Card* cpoint);//print player name and match num
+    int getMatch();//get match num for print()
+    void append(Card* cpoint, char suit, char num);//add cards to set hand
+private:
+    int match;
+    string name;
+    
+};
+
 
 #endif
 
