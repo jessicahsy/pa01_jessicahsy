@@ -65,7 +65,7 @@ int main(int argv, char** argc){
   //c2.printCards();
  bool go=false;
  int turn=0;//player1 goes on even num turns, player2 goes on odd num turns
- while (c1.looped(c2)){
+ while (c1.looped(c2)!=-1){
   if (go==false){c1.defaultHere();}
   int point=c1.looped(c2);
   if (point!=-1){
@@ -73,10 +73,12 @@ int main(int argv, char** argc){
       p1.addMatch();
       cout<<p1.getName()<<" picked matching card "<<c1.getCard()<<endl;
       //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
+
     }else{
       p2.addMatch();
       cout<<p2.getName()<<" picked matching card "<<c1.getCard()<<endl;
     }
+    c2.removeOther(point);
     c1.removeNode(c2);
   }
   turn++;
@@ -84,7 +86,7 @@ int main(int argv, char** argc){
  //cout<<c1.looped(c2);
   p1.print(&c1);
   p2.print(&c2);
-  //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
-  //cout<<"P2 Matches:"<<p2.getMatch()<<endl;
+  cout<<"P1 Matches:"<<p1.getMatch()<<endl;
+  cout<<"P2 Matches:"<<p2.getMatch()<<endl;
   return 0;
 }

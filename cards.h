@@ -14,9 +14,10 @@ class Card{//linkedlist with nodes representing cards
     string getCard() const;
     void printCards() const;
     void append(char suit,char num);
-    bool contain(char suit, char num);
+    int contain(char suit, char num);
+    void removeOther(int other);
     void removeNode(Card c2);
-    bool looped(Card c2);
+    int looped(Card c2);
     int getLen();
     void getP();
     Card(const Card& source);
