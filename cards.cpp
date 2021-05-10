@@ -69,7 +69,7 @@ int Card::contain(char suit, char num){
 void Card::removeOther(int other){
   Node*o=first;
   Node*prev;
-  cout<<other<<"  OTHER^^\n";
+  cout<<other+1<<"  OTHER^^\n";
   for(int i=0;i<other-1;i++){o=o->next;}
   prev=o;
   o=o->next;

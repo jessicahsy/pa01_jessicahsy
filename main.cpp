@@ -63,11 +63,12 @@ int main(int argv, char** argc){
   //c1.printCards();
   //cout<<"p2: "<<p2.getName()<<endl;
   //c2.printCards();
- bool go=false;
  int turn=0;//player1 goes on even num turns, player2 goes on odd num turns
- while (c1.looped(c2)!=-1){
-  if (go==false){c1.defaultHere();}
-  int point=c1.looped(c2);
+ int point=c1.looped(c2);
+ c1.defaultHere();
+ while (point!=-1){
+
+  point=c1.looped(c2);
   if (point!=-1){
     if (turn%2==0){
       p1.addMatch();
@@ -82,6 +83,8 @@ int main(int argv, char** argc){
     c1.removeNode(c2);
   }
   turn++;
+  //cout<<point<<"<--point"<<endl;
+  if (point==-1){break;}
  }
  //cout<<c1.looped(c2);
   p1.print(&c1);
