@@ -8,20 +8,20 @@ using namespace std;
 
 class Card{//linkedlist with nodes representing cards
  public:
-    Card();
-    ~Card();
-    void tryy();
-    void defaultHere();
-    string getCard() const;
-    void printCards() const;
-    void append(char suit,char num);
-    int contain(char suit, char num)const;
-    void removeOther(int other);
-    void removeNode();
-    int looped(Card c,int last);
-    int getP();
-    Card(const Card& source);
-    Card& operator=(const Card& source);
+    inline Card();
+    inline ~Card();
+    inline void tryy();
+    inline void defaultHere();
+    inline string getCard() const;
+    inline void printCards() const;
+    inline void append(char suit,char num);
+    inline int contain(char suit, char num)const;
+    inline void removeOther(int other);
+    inline void removeNode();
+    inline int looped(Card c,int last);
+    inline int getP();
+    inline Card(const Card& source);
+    inline Card& operator=(const Card& source);
 
  private:
     void remove_nodes(){
@@ -44,13 +44,12 @@ class Card{//linkedlist with nodes representing cards
 
 class Player{
 public:
-    Player();
-    void setName(string newName);
-    string getName();
-    void addMatch();
-    int getMatch();//get match num for print()
-    //void append(Card* cpoint, char suit, char num);// dont need this
-    void print(Card* cpoint);//print player name and match num
+    inline Player();
+    inline void setName(string newName);
+    inline string getName();
+    inline void addMatch();
+    inline int getMatch();//get match num for print()
+    inline void print(Card* cpoint);//print player name and match num
 private:
     int match;
     string name;

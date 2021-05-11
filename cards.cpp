@@ -9,8 +9,8 @@
 #include <fstream>
 using namespace std;
 //################ CARD  ################
-Card::Card():first(0),p_here(-1) {}
-Card::~Card(){
+inline Card::Card():first(0),p_here(-1) {}
+inline Card::~Card(){
     remove_nodes();}
 // void Card::tryy(){
 //   Node*n=first;
@@ -18,9 +18,9 @@ Card::~Card(){
 //   cout<<n->_suit<<n->_num<<"<-CARD"<<endl;
 // }
 
-void Card::defaultHere(){p_here=-1;}
+inline void Card::defaultHere(){p_here=-1;}
 
-string Card::getCard() const{
+inline string Card::getCard() const{
   Node*n=first;
   for(int i=0;i<p_here;i++){n=n->next;}
   string suit(1,(n->_suit));
@@ -29,7 +29,7 @@ string Card::getCard() const{
   return s;
 }
 
-void Card::printCards() const{
+inline void Card::printCards() const{
   Node *n = first;
   if (n==NULL){cout<<"Empty: No Cards"<<endl;}
   while (n) 
@@ -40,7 +40,7 @@ void Card::printCards() const{
   }
   cout <<endl;} 
 
-void Card::append(char suit,char num) {
+inline void Card::append(char suit,char num) {
   if (first == 0) { // empty list
     first = new Node;
     first->_suit = suit;
@@ -56,7 +56,7 @@ void Card::append(char suit,char num) {
     n->next->_num = num;
     n->next->next = 0;
   }}
-int Card::contain(char suit, char num)const{
+inline int Card::contain(char suit, char num)const{
   Node *n = first;
   int other=0;
   while (n) {
@@ -69,7 +69,7 @@ int Card::contain(char suit, char num)const{
       break;}
     }
   return -1; }
-void Card::removeOther(int other){
+inline void Card::removeOther(int other){
   Node*o=first;
   Node*prev;
   for(int i=0;i<other-1;i++){o=o->next;}
@@ -82,7 +82,7 @@ void Card::removeOther(int other){
   }
   delete o;
   }
-void Card::removeNode(){
+inline void Card::removeNode(){
   Node*n=first;
   Node*prev;
   for(int i=0;i<p_here-1;i++){n=n->next;}
@@ -96,7 +96,7 @@ void Card::removeNode(){
   delete n;
 
 }
-int Card::looped(Card c, int last){
+inline int Card::looped(Card c, int last){
   Node*n=first;
   Node*h=n;
   bool lastFound=false;
@@ -123,11 +123,11 @@ int Card::looped(Card c, int last){
     }
   return -1;
 }
-int Card::getP(){
+inline int Card::getP(){
   return p_here;
 }
 
-Card::Card(const Card& source) {
+inline Card::Card(const Card& source) {
   if (source.first!=nullptr){
     Node*obj=source.first;
     first=new Node;
@@ -145,7 +145,7 @@ Card::Card(const Card& source) {
   }
 }
 
-Card& Card::operator=(const Card& source){
+inline Card& Card::operator=(const Card& source){
   if (this!=&source){
     remove_nodes();
     if (source.first!=nullptr){
@@ -168,12 +168,12 @@ Card& Card::operator=(const Card& source){
   
 
 //################ PLAYER  ################
-Player::Player():match(0),name("NoName"){}
-void Player::setName(string newName){name=newName;}
-string Player::getName(){return name;}
-void Player::addMatch(){match++;}
-int Player::getMatch(){return match;}
-void Player::print(Card* cpoint){
+inline Player::Player():match(0),name("NoName"){}
+inline void Player::setName(string newName){name=newName;}
+inline string Player::getName(){return name;}
+inline void Player::addMatch(){match++;}
+inline int Player::getMatch(){return match;}
+inline void Player::print(Card* cpoint){
   cout<<endl<<name<<"'s cards:\n";
   (*cpoint).printCards();}
 

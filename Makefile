@@ -1,23 +1,23 @@
 CXX_FLAG = --std=c++11 -g
-all: testlist #main
+all: testlist main
 
 testlist: testcards.o cards.o
 	g++ $(CXX_FLAG) -o testcards testcards.o cards.o
 
-# main: main.o cards.o
-# 	g++ $(CXX_FLAG) -o main main.o cards.o
+main: main.o cards.o
+	g++ $(CXX_FLAG) -o main main.o cards.o
 
 testlist.o: testcards.cpp
 	g++ -c $(CXX_FLAG) testcards.cpp
 
-# main.o: main.cpp
-# 	g++ -c $(CXX_FLAG) main.cpp
+main.o: main.cpp
+	g++ -c $(CXX_FLAG) main.cpp
 
 cards.o: cards.cpp
-	g++ -c $(CXX_FLAG) cards.cpp
+	g++ -c $(CXX_FLAG) cards.cpp cards.h
 
 clean:
-	rm -f  testlist *.o
+	rm -f main testlist *.o
 
 
 # #lab03
