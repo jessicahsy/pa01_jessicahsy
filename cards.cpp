@@ -13,10 +13,12 @@ Card::Card():first(0),here(0),p_here(-1) {}
 Card::~Card(){
     remove_nodes();}
 
-void Card::defaultHere(){here=0;p_here=-1;}
+void Card::defaultHere(){p_here=-1;}
+
 string Card::getCard() const{
   Node*n=first;
   for(int i=0;i<p_here;i++){n=n->next;}
+  cout<<p_here<<"HERE//";
   string suit(1,(n->_suit));
   string num(1,(n->_num));
   string s=suit+" "+num;
@@ -51,13 +53,13 @@ void Card::append(char suit,char num) {
     n->next->_num = num;
     n->next->next = 0;
   }}
-int Card::contain(char suit, char num){
+int Card::contain(char suit, char num)const{
   Node *n = first;
   int other=0;
   while (n) {
     if ((n->_suit==suit)&&(n->_num==num)){
-      here=n;
-      
+      //here=n;
+      cout<<"   contain return: other for"<<n->_suit<<n->_num<<"  "<<other<<endl;
       return other;}
     other++;
     if (n->next){
@@ -69,7 +71,7 @@ int Card::contain(char suit, char num){
 void Card::removeOther(int other){
   Node*o=first;
   Node*prev;
-  cout<<other+1<<"  OTHER^^\n";
+  cout<<other<<"  OTHER^^\n";
   for(int i=0;i<other-1;i++){o=o->next;}
   prev=o;
   o=o->next;
@@ -89,29 +91,31 @@ void Card::removeNode(Card c2){
   n=n->next;//n is node to be removed
   if (n->next){
       prev->next=n->next;
-      //cout<<prev->_suit<<" previous"<<prev->_num<<endl;
-      //cout<<n->_suit<<" "<<n->_num<<endl;
-      //cout<<prev->next->_suit<<" new next"<<prev->next->_num<<endl;
   }else{
     prev->next=NULL;
   }
+  //if (p_here)
   delete n;
 
 }
 int Card::looped(Card c){
   Node*n=first;
-  Node*h=here;
+  Node*h=n;
+  int p_=p_here;
   bool lastFound=false;
-
+  //c.defaultHere();
   while (n){
-    if (p_here+1==c.getLen()){p_here=-1;}
-    if (lastFound==true){p_here--;lastFound=false;}
-    p_here++;
-    if (!h){h=n;}
-    //cout<<h->_suit<<h->_num<<"<-CARD,P->"<<p_here<<endl;
-    if (c.contain(h->_suit,h->_num)!=-1){
+    //if (p_here+1==c.getLen()){p_here=0;lastFound=true;}
+    if (lastFound==true){lastFound=false;}else{p_here++;}
+    cout<<h->_suit<<h->_num<<"<-CARD,P->"<<p_here<<endl;
+
+    //if (!h){h=n;}
+
+    int test=(c.contain(h->_suit,h->_num));
+    if (test!=-1){
       lastFound=true;
-      return c.contain(h->_suit,h->_num);}
+      cout<<"   "<<test<<" looped return\n";
+      return test;}
     if (n->next){
       n=n->next;
       if (h->next){

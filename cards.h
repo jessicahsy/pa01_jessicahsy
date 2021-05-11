@@ -14,7 +14,7 @@ class Card{//linkedlist with nodes representing cards
     string getCard() const;
     void printCards() const;
     void append(char suit,char num);
-    int contain(char suit, char num);
+    int contain(char suit, char num)const;
     void removeOther(int other);
     void removeNode(Card c2);
     int looped(Card c2);
@@ -39,7 +39,7 @@ class Card{//linkedlist with nodes representing cards
         Node* next;
     };
     Node*first;
-    Node*here;
+    Node*here;//remove
     int p_here;
 };
 
