@@ -30,8 +30,7 @@ int main(int argv, char** argc){
   // to contain two sets of cards in two input files
   Player p1,p2;
   Card c1,c2;
-  Card*cpoint1=&c1;
-  Card*cpoint2=&c2;
+
 
   // Read each file and store cards
   while (getline (cardFile1, line) && (line.length() > 0)){
@@ -98,6 +97,8 @@ int main(int argv, char** argc){
  }
   p1.print(&c1);
   p2.print(&c2);
+  //c1.tryy();
+
   //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
   //cout<<"P2 Matches:"<<p2.getMatch()<<endl;
   return 0;

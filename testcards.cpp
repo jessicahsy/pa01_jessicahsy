@@ -7,6 +7,22 @@
 #include <vector>
 using namespace std;
 
+// Card::Card():first(0),p_here(-1) {}
+// void Card::append(char suit,char num) {
+//   if (first == 0) { // empty list
+//     first = new Node;
+//     first->_suit = suit;
+//     first->_num = num;
+//     first->next = 0;
+//   }else {
+//     Node *n = first;
+//     while (n->next) // not last node yet
+//       n = n->next;
+//     n->next = new Node;
+//     n->next->_suit = suit;
+//     n->next->_num = num;
+//     n->next->next = 0;
+//   }}
 int main(){
   runAll();
   return 0;
@@ -20,7 +36,10 @@ void runAll(){
 
 void test_append(){
   START_TEST("test_append");
-  test_append_empty_list();
+  test_append_empty_list(
+    //Card c1;
+    //c1.append('s','1')
+  );
   test_append_single_element_list();
   END_TEST("test_append");
 
@@ -53,8 +72,8 @@ void test_append_single_element_list(){
 }
 void test_equal_empty_list(){ 
   string testname = "case 0: [], []";
-  LinkedList l1, l2;
-  assertEquals(l1.head,l2.head);
+  //LinkedList l1, l2;
+  //assertEquals(l1.head,l2.head);
 }
 
 void test_card_operator_double_equal(){

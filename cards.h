@@ -10,6 +10,7 @@ class Card{//linkedlist with nodes representing cards
  public:
     Card();
     ~Card();
+    void tryy();
     void defaultHere();
     string getCard() const;
     void printCards() const;
@@ -21,7 +22,6 @@ class Card{//linkedlist with nodes representing cards
     int getP();
     Card(const Card& source);
     Card& operator=(const Card& source);
-    
 
  private:
     void remove_nodes(){
@@ -31,11 +31,12 @@ class Card{//linkedlist with nodes representing cards
             first=temp; 
         }
     }
-    
+
     struct Node {
         char _suit;
         char _num;
         Node* next;
+        //Node* operator++(Node obj){return obj.next;}
     };
     Node*first;
     int p_here;

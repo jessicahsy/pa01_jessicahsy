@@ -12,6 +12,11 @@ using namespace std;
 Card::Card():first(0),p_here(-1) {}
 Card::~Card(){
     remove_nodes();}
+// void Card::tryy(){
+//   Node*n=first;
+//   cout<<n->_suit<<n->_num<<"<-CARD"<<endl; n++;
+//   cout<<n->_suit<<n->_num<<"<-CARD"<<endl;
+// }
 
 void Card::defaultHere(){p_here=-1;}
 

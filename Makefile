@@ -1,19 +1,23 @@
+CXX_FLAG = --std=c++11 -g
+all: testlist #main
 
-# # Makefile
-# CXX_FLAG = --std=c++11 -g
-# all: game testcards
+testlist: testcards.o cards.o
+	g++ $(CXX_FLAG) -o testcards testcards.o cards.o
 
-# game: main.o cards.o
-# 	g++ $(CXX_FLAG) -o game main.o cards.o
+# main: main.o cards.o
+# 	g++ $(CXX_FLAG) -o main main.o cards.o
 
-# game.o: main.cpp
-# 	g++ -c $(CXX_FLAG) main.cpp cards.h
+testlist.o: testcards.cpp
+	g++ -c $(CXX_FLAG) testcards.cpp
 
-# cards.o: cards.cpp
-# 	g++ -c $(CXX_FLAG) cards.cpp
+# main.o: main.cpp
+# 	g++ -c $(CXX_FLAG) main.cpp
 
-# clean:
-# 	rm -f game *.o
+cards.o: cards.cpp
+	g++ -c $(CXX_FLAG) cards.cpp
+
+clean:
+	rm -f  testlist *.o
 
 
 # #lab03
