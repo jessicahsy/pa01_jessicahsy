@@ -59,50 +59,46 @@ int main(int argv, char** argc){
   //cin >> name;
   p2.setName("Bob");
   //INITIAL:
-  //cout<<"p1: "<<p1.getName()<<endl;
-  //c1.printCards();
-  //cout<<"p2: "<<p2.getName()<<endl;
-  //c2.printCards();
+
  int turn=0;//player1 goes on even num turns, player2 goes on odd num turns
- int point=c1.looped(c2);
- c1.defaultHere();
- bool go=true;
- while (point!=-1){
-  cout<<endl<<"GO"<<endl<<point<<endl;
+ int point=c1.looped(c2,-1);//returns -1 if there are no matches
+ //c1.defaultHere();
+ int last1=-2;
+ int last2=-2;
+ while (point!=-1){//ends game/while loop when there are no matches
   if (point!=-1){
-    cout<<"turn "<<turn<<endl;
     if (turn%2==0){
-      cout<<"_______ALICE_____\n";
-      point=c1.looped(c2);
+      //point=c1.looped(c2);
       p1.addMatch();
-      cout<<"#######################"<<p1.getName()<<" picked matching card "<<c1.getCard()<<endl;
+      cout<<p1.getName()<<" picked matching card "<<c1.getCard()<<endl;
+      last1=c1.getP();
+      cout<<"   >>>>>>>>Last match in p1: "<<last1<<endl;
       c2.removeOther(point);
-      c1.removeNode(c2);
+      c1.removeNode();
       c1.defaultHere();
+      //check for next hand; update point for while loop
+      point=c2.looped(c1,last2); //c2.defaultHere();
 
     }else{
-      //if (go==false){c2.defaultHere();go=true;}
-      //c2.defaultHere();
-      point=c2.looped(c1);
+      //point=c2.looped(c1);
       p2.addMatch();
-      cout<<"#######################"<<p2.getName()<<" picked matching card "<<c2.getCard()<<endl;
+      cout<<p2.getName()<<" picked matching card "<<c2.getCard()<<endl;
+      last2=c2.getP();
+      cout<<"   >>>>>>>>Last match in p2: "<<last2<<endl;
       c1.removeOther(point);
-      c2.removeNode(c1);
+      c2.removeNode();
       c2.defaultHere();
+      //check for next hand; update point for while loop
+      point=c1.looped(c2,last1);//c1.defaultHere();
     }
     
   }
   turn++;
-  cout<<">>>>>New turn:";
-  if (turn%2==0){point=c1.looped(c2);c1.defaultHere(); }else{point=c2.looped(c1); c2.defaultHere();}
-  //cout<<point<<"<--point"<<endl;
-  //c1.defaultHere();c2.defaultHere();
   if (point==-1){break;}
  }
- //cout<<c1.looped(c2);
   p1.print(&c1);
   p2.print(&c2);
-  cout<<"P1 Matches:"<<p1.getMatch()<<endl;
-  cout<<"P2 Matches:"<<p2.getMatch()<<endl;
+  //cout<<"P1 Matches:"<<p1.getMatch()<<endl;
+  //cout<<"P2 Matches:"<<p2.getMatch()<<endl;
   return 0;
 }

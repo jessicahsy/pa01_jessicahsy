@@ -9,7 +9,7 @@
 #include <fstream>
 using namespace std;
 //################ CARD  ################
-Card::Card():first(0),here(0),p_here(-1) {}
+Card::Card():first(0),p_here(-1) {}
 Card::~Card(){
     remove_nodes();}
 
@@ -18,7 +18,6 @@ void Card::defaultHere(){p_here=-1;}
 string Card::getCard() const{
   Node*n=first;
   for(int i=0;i<p_here;i++){n=n->next;}
-  cout<<p_here<<"HERE//";
   string suit(1,(n->_suit));
   string num(1,(n->_num));
   string s=suit+" "+num;
@@ -27,7 +26,7 @@ string Card::getCard() const{
 
 void Card::printCards() const{
   Node *n = first;
-  if (n==NULL){cout<<"empty: no cards"<<endl;}
+  if (n==NULL){cout<<"Empty: No Cards"<<endl;}
   while (n) 
   {
     cout << n->_suit<<" "<<n->_num;
@@ -38,7 +37,6 @@ void Card::printCards() const{
 
 void Card::append(char suit,char num) {
   if (first == 0) { // empty list
-    //cout<<"NewList"<<endl;
     first = new Node;
     first->_suit = suit;
     first->_num = num;
@@ -58,8 +56,6 @@ int Card::contain(char suit, char num)const{
   int other=0;
   while (n) {
     if ((n->_suit==suit)&&(n->_num==num)){
-      //here=n;
-      cout<<"   contain return: other for"<<n->_suit<<n->_num<<"  "<<other<<endl;
       return other;}
     other++;
     if (n->next){
@@ -71,7 +67,6 @@ int Card::contain(char suit, char num)const{
 void Card::removeOther(int other){
   Node*o=first;
   Node*prev;
-  cout<<other<<"  OTHER^^\n";
   for(int i=0;i<other-1;i++){o=o->next;}
   prev=o;
   o=o->next;
@@ -82,39 +77,34 @@ void Card::removeOther(int other){
   }
   delete o;
   }
-void Card::removeNode(Card c2){
-  //if (here){cout<<here->_suit<<here->_num<<"<-CARD,P->"<<p_here<<endl;}else{cout<<"nothing here";}
+void Card::removeNode(){
   Node*n=first;
   Node*prev;
   for(int i=0;i<p_here-1;i++){n=n->next;}
   prev=n;
-  n=n->next;//n is node to be removed
+  n=n->next;//n is now node to be removed
   if (n->next){
       prev->next=n->next;
   }else{
     prev->next=NULL;
   }
-  //if (p_here)
   delete n;
 
 }
-int Card::looped(Card c){
+int Card::looped(Card c, int last){
   Node*n=first;
   Node*h=n;
-  int p_=p_here;
+  cout<<"New:  Start at "<<last<<endl;
+  
+
   bool lastFound=false;
-  //c.defaultHere();
   while (n){
-    //if (p_here+1==c.getLen()){p_here=0;lastFound=true;}
     if (lastFound==true){lastFound=false;}else{p_here++;}
     cout<<h->_suit<<h->_num<<"<-CARD,P->"<<p_here<<endl;
-
-    //if (!h){h=n;}
 
     int test=(c.contain(h->_suit,h->_num));
     if (test!=-1){
       lastFound=true;
-      cout<<"   "<<test<<" looped return\n";
       return test;}
     if (n->next){
       n=n->next;
@@ -126,19 +116,10 @@ int Card::looped(Card c){
     }
   return -1;
 }
-int Card::getLen(){
-  Node*n=first;
-  int count=0;
-  while (n){
-    count++;
-    if (n->next){n=n->next;}else{break;}
-  }
-  //cout<<"Len: "<<count<<endl;
-  return count;
+int Card::getP(){
+  return p_here;
 }
-void Card::getP(){
-  cout<<p_here<<"<--P_HERE"<<endl;
-}
+
 Card::Card(const Card& source) {
   if (source.first!=nullptr){
     Node*obj=source.first;

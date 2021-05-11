@@ -16,10 +16,9 @@ class Card{//linkedlist with nodes representing cards
     void append(char suit,char num);
     int contain(char suit, char num)const;
     void removeOther(int other);
-    void removeNode(Card c2);
-    int looped(Card c2);
-    int getLen();
-    void getP();
+    void removeNode();
+    int looped(Card c,int last);
+    int getP();
     Card(const Card& source);
     Card& operator=(const Card& source);
     
@@ -39,7 +38,6 @@ class Card{//linkedlist with nodes representing cards
         Node* next;
     };
     Node*first;
-    Node*here;//remove
     int p_here;
 };
 
