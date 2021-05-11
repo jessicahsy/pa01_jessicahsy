@@ -57,8 +57,8 @@ int Card::contain(char suit, char num)const{
   while (n) {
     if ((n->_suit==suit)&&(n->_num==num)){
       return other;}
-    other++;
     if (n->next){
+      other++;
       n = n->next;
     }else{
       break;}
@@ -69,7 +69,7 @@ void Card::removeOther(int other){
   Node*prev;
   for(int i=0;i<other-1;i++){o=o->next;}
   prev=o;
-  o=o->next;
+  o=o->next;//o is now node to be removed
   if (o->next){
       prev->next=o->next;
   }else{
@@ -94,17 +94,19 @@ void Card::removeNode(){
 int Card::looped(Card c, int last){
   Node*n=first;
   Node*h=n;
-  cout<<"New:  Start at "<<last<<endl;
-  
-
   bool lastFound=false;
+  //int pt;
+  if (last!=-2){
+    p_here=last-1;
+    for(int i=0;i<last;i++){n=n->next;h=h->next;}
+    }
+
   while (n){
     if (lastFound==true){lastFound=false;}else{p_here++;}
-    cout<<h->_suit<<h->_num<<"<-CARD,P->"<<p_here<<endl;
+    //cout<<h->_suit<<h->_num<<"<-CARD,P->"<<p_here<<endl; 
 
     int test=(c.contain(h->_suit,h->_num));
     if (test!=-1){
-      lastFound=true;
       return test;}
     if (n->next){
       n=n->next;
