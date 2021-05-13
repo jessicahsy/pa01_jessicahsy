@@ -8,6 +8,13 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+  // uses p_here to determine which node to remove
+  // p_here determined in looped() and points to where the match is found
+  //   in player playing this hand
+  // variable other is returned by contain() and looped(),
+  //   which indicates where the match is found in the other player's set
+  // if there are no matches, contain() returns -1, break from while loop, game ends
+
 //################ CARD  ################
 inline Card::Card():first(0),p_here(-1) {}
 inline Card::~Card(){
@@ -16,6 +23,8 @@ inline Card::~Card(){
 inline void Card::defaultHere(){p_here=-1;}
 
 inline string Card::getCard() const{
+  //used to locate card for output right after match is found
+  //dependent on p_here
   Node*n=first;
   for(int i=0;i<p_here;i++){n=n->next;}
   string suit(1,(n->_suit));
@@ -35,7 +44,7 @@ inline void Card::printCards() const{
   }
   cout <<endl;} 
 
-inline void Card::append(char suit,char num) {
+inline void Card::append(char suit,char num) {//append card node to end of list
   if (first == 0) { // empty list
     first = new Node;
     first->_suit = suit;
@@ -51,7 +60,7 @@ inline void Card::append(char suit,char num) {
     n->next->_num = num;
     n->next->next = 0;
   }}
-inline int Card::contain(char suit, char num)const{
+inline int Card::contain(char suit, char num)const{//returns where match is found in other player's set
   Node *n = first;
   int other=0;
   while (n) {
@@ -64,7 +73,7 @@ inline int Card::contain(char suit, char num)const{
       break;}
     }
   return -1; }
-inline void Card::removeOther(int other){
+inline void Card::removeOther(int other){//remove card in the other player's set
   Node*o=first;
   Node*prev;
   for(int i=0;i<other-1;i++){o=o->next;}
@@ -77,7 +86,7 @@ inline void Card::removeOther(int other){
   }
   delete o;
   }
-inline void Card::removeNode(){
+inline void Card::removeNode(){//remove card in the playing player's set
   Node*n=first;
   Node*prev;
   for(int i=0;i<p_here-1;i++){n=n->next;}
@@ -90,10 +99,12 @@ inline void Card::removeNode(){
   }
   delete n;
 }
-inline void Card::removeAll(){
+inline void Card::removeAll(){//remove all nodes
   remove_nodes();
 }
 inline int Card::looped(Card c, int last){
+  //sets p_here to where match is found in playing player's set
+  //returns where match is found in the other player's set
   Node*n=first;
   Node*h=n;
   bool lastFound=false;
@@ -120,10 +131,10 @@ inline int Card::looped(Card c, int last){
     }
   return -1;
 }
-inline int Card::getP(){
+inline int Card::getP(){//used for testing, get p_here
   return p_here;
 }
-inline int Card::getLen(){
+inline int Card::getLen(){//get length of list
   Node*n=first;
   int count=0;
   while (n){
@@ -132,7 +143,7 @@ inline int Card::getLen(){
   return count;
 }
 
-inline Card::Card(const Card& source) {
+inline Card::Card(const Card& source) {//copy constructor
   if (source.first!=nullptr){
     Node*obj=source.first;
     first=new Node;
@@ -150,7 +161,7 @@ inline Card::Card(const Card& source) {
   }
 }
 
-inline Card& Card::operator=(const Card& source){
+inline Card& Card::operator=(const Card& source){//overloaded assignment operator
   if (this!=&source){
     remove_nodes();
     if (source.first!=nullptr){
@@ -170,7 +181,8 @@ inline Card& Card::operator=(const Card& source){
     }
   }
   return *this;}
-inline bool Card::operator==(const Card & lhs) const{
+inline bool Card::operator==(const Card & lhs) const{//overloaded double equal operator
+// tests if both card lists are exactly the same
   if (first){
     if (!lhs.first){return false;}
     Node* n=first;
@@ -192,7 +204,7 @@ inline void Player::setName(string newName){name=newName;}
 inline string Player::getName(){return name;}
 inline void Player::addMatch(){match++;}
 inline int Player::getMatch(){return match;}
-inline void Player::print(Card* cpoint){
+inline void Player::print(Card* cpoint){//outputs player name and all cards
   cout<<endl<<name<<"'s cards:\n";
   (*cpoint).printCards();}
 
