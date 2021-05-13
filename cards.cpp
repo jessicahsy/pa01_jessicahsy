@@ -12,11 +12,6 @@ using namespace std;
 inline Card::Card():first(0),p_here(-1) {}
 inline Card::~Card(){
     remove_nodes();}
-// void Card::tryy(){
-//   Node*n=first;
-//   cout<<n->_suit<<n->_num<<"<-CARD"<<endl; n++;
-//   cout<<n->_suit<<n->_num<<"<-CARD"<<endl;
-// }
 
 inline void Card::defaultHere(){p_here=-1;}
 
@@ -94,7 +89,9 @@ inline void Card::removeNode(){
     prev->next=NULL;
   }
   delete n;
-
+}
+inline void Card::removeAll(){
+  remove_nodes();
 }
 inline int Card::looped(Card c, int last){
   Node*n=first;
@@ -125,6 +122,14 @@ inline int Card::looped(Card c, int last){
 }
 inline int Card::getP(){
   return p_here;
+}
+inline int Card::getLen(){
+  Node*n=first;
+  int count=0;
+  while (n){
+    count++;
+    if (n->next){n=n->next;}else{break;}}
+  return count;
 }
 
 inline Card::Card(const Card& source) {
@@ -165,7 +170,21 @@ inline Card& Card::operator=(const Card& source){
     }
   }
   return *this;}
-  
+inline bool Card::operator==(const Card & lhs) const{
+  if (first){
+    if (!lhs.first){return false;}
+    Node* n=first;
+    Node* o= lhs.first;
+    while ((n->next)&&(o->next)){
+      if ((n->_suit==o->_suit)&&(n->_num==o->_num)){cout<<"yay\n";}else{return false;}
+      n=n->next; o=o->next;
+    }
+    if ((n->next)||(o->next)){return false;}//len of lists are different
+    }
+  else{
+    if(lhs.first){return false;}}
+  return true;}
+
 
 //################ PLAYER  ################
 inline Player::Player():match(0),name("NoName"){}

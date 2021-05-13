@@ -17,7 +17,7 @@ cards.o: cards.cpp
 	g++ -c $(CXX_FLAG) cards.cpp cards.h
 
 clean:
-	rm -f main testlist *.o
+	rm -f main testcards *.o
 
 
 # #lab03

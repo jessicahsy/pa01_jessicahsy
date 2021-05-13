@@ -10,7 +10,6 @@ class Card{//linkedlist with nodes representing cards
  public:
     inline Card();
     inline ~Card();
-    inline void tryy();
     inline void defaultHere();
     inline string getCard() const;
     inline void printCards() const;
@@ -18,10 +17,13 @@ class Card{//linkedlist with nodes representing cards
     inline int contain(char suit, char num)const;
     inline void removeOther(int other);
     inline void removeNode();
+    inline void removeAll();
     inline int looped(Card c,int last);
     inline int getP();
+    inline int getLen();
     inline Card(const Card& source);
     inline Card& operator=(const Card& source);
+    inline bool operator==(const Card& lhs)const;
 
  private:
     void remove_nodes(){
